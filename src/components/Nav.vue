@@ -3,9 +3,9 @@
     <v-toolbar color="#03a9f4" dense>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title class="pointer" @click="goHome"
-        >Water Maps</v-toolbar-title
-      >
+      <v-toolbar-title class="pointer" @click.prevent="goHome">
+        <h1>Water Maps</h1>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -29,7 +29,7 @@ export default {
         });
     },
     goHome() {
-      this.$router.push("/");
+      this.$router.push("/").catch(() => {});
     },
   },
   computed: {},
