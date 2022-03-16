@@ -19,13 +19,11 @@
             v-model="passwordRegister"
           ></v-text-field>
         </v-card-text>
-        <v-divider class="mt-12"></v-divider>
-        <v-card-actions>
-          <v-btn @click="register" color="primary" text type="submit">
-            S'inscrire
-          </v-btn>
-        </v-card-actions>
       </v-card>
+      <div style="cursor: pointer" @click="haveAccount">Déjà un compte ?</div>
+      <v-btn @click="register" class="mt-4" light color="primary--text">
+        S'inscrire
+      </v-btn>
     </v-col>
   </v-row>
 </template>
@@ -60,6 +58,9 @@ export default {
         .catch((error) => {
           alert(error.message);
         });
+    },
+    haveAccount() {
+      this.$router.push("/login");
     },
   },
 };

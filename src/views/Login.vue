@@ -4,6 +4,7 @@
       <h1>Water Maps</h1>
     </v-col>
     <v-col cols="6" class="right">
+      <h1>Bienvenue !</h1>
       <v-card flat>
         <v-card-text>
           <h4>Se connecter</h4>
@@ -22,6 +23,9 @@
           ></v-text-field>
         </v-card-text>
       </v-card>
+      <div style="cursor: pointer" @click="needAccount">
+        Besoin d'un compte ?
+      </div>
 
       <v-btn @click="login" class="mt-4" light color="primary--text">
         Se connecter
@@ -60,12 +64,9 @@ export default {
           alert(error.message);
         });
     },
-    test() {
-      console.log("le router cest : ", this.$routes.path);
+    needAccount() {
+      this.$router.push("/register");
     },
-  },
-  mounted() {
-    this.test;
   },
 };
 </script>
