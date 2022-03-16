@@ -1,10 +1,10 @@
 <template>
   <v-row class="login">
-    <v-col cols="6" class="left">
+    <v-col cols="6">
       <h1>Water Maps</h1>
     </v-col>
-    <v-col cols="6">
-      <v-card>
+    <v-col cols="6" class="right">
+      <v-card flat>
         <v-card-text>
           <h4>Se connecter</h4>
           <v-text-field
@@ -21,11 +21,11 @@
             v-model="passwordLogin"
           ></v-text-field>
         </v-card-text>
-        <v-divider class="mt-12"></v-divider>
-        <v-card-actions>
-          <v-btn @click="login" color="primary" text> Se connecter </v-btn>
-        </v-card-actions>
       </v-card>
+
+      <v-btn @click="login" class="mt-4" color="secondary">
+        Se connecter
+      </v-btn>
     </v-col>
   </v-row>
 </template>
@@ -43,6 +43,8 @@ export default {
       emailLogin: "",
       passwordLogin: "",
       error: "",
+      loader: null,
+      loading: false,
     };
   },
   methods: {
@@ -69,10 +71,46 @@ export default {
 </script>
 
 <style>
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .login {
   height: 100%;
 }
-.left {
+.right {
   background: #03a9f4;
 }
 </style>
