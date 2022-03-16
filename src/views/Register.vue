@@ -1,10 +1,11 @@
 <template>
-  <v-row>
+  <v-row class="register">
     <v-col cols="6"></v-col>
-    <v-col cols="6">
+    <v-col cols="6" class="right">
+      <h1>Bienvenue !</h1>
       <v-card>
         <v-card-text>
-          <h4>S'inscrire</h4>
+          <h2>S'inscrire</h2>
           <v-text-field
             label="Adresse mail"
             required
@@ -65,5 +66,11 @@ export default {
   },
 };
 </script>
-
-<style></style>
+<style>
+.register {
+  height: 100%;
+}
+.right {
+  background: #03a9f4;
+}
+</style>

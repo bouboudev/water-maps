@@ -7,7 +7,7 @@
       <h1>Bienvenue !</h1>
       <v-card flat>
         <v-card-text>
-          <h4>Se connecter</h4>
+          <h2>Se connecter</h2>
           <v-text-field
             label="Adresse mail"
             required
