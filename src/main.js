@@ -25,6 +25,9 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+const db = firebase.firestore();
+db.settings({ timestampsInSnapshots: true });
+
 firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = new Vue({
@@ -34,3 +37,5 @@ firebase.auth().onAuthStateChanged(() => {
     }).$mount("#app");
   }
 });
+
+export default db;
