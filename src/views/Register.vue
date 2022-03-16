@@ -21,6 +21,11 @@
           ></v-text-field>
         </v-card-text>
       </v-card>
+      <div class="white--text text--darken-1" v-show="error != ''">
+        <strong>
+          <p>{{ error }}</p>
+        </strong>
+      </div>
       <div style="cursor: pointer" @click="haveAccount">Déjà un compte ?</div>
       <v-btn @click="register" class="mt-4" light color="primary--text">
         S'inscrire
@@ -57,7 +62,7 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
-          alert(error.message);
+          this.error = error.message;
         });
     },
     haveAccount() {

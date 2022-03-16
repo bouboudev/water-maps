@@ -23,6 +23,11 @@
           ></v-text-field>
         </v-card-text>
       </v-card>
+      <div class="white--text text--darken-1" v-show="error != ''">
+        <strong>
+          <p>{{ error }}</p>
+        </strong>
+      </div>
       <div style="cursor: pointer" @click="needAccount">
         Besoin d'un compte ?
       </div>
@@ -61,7 +66,7 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
-          alert(error.message);
+          this.error = error.message;
         });
     },
     needAccount() {
