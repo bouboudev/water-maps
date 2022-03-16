@@ -1,6 +1,8 @@
 <template>
-  <v-row>
-    <v-col cols="6"></v-col>
+  <v-row class="login">
+    <v-col cols="6" class="left">
+      <h1>Water Maps</h1>
+    </v-col>
     <v-col cols="6">
       <v-card>
         <v-card-text>
@@ -56,8 +58,21 @@ export default {
           alert(error.message);
         });
     },
+    test() {
+      console.log("le router cest : ", this.$routes.path);
+    },
+  },
+  mounted() {
+    this.test;
   },
 };
 </script>
 
-<style></style>
+<style>
+.login {
+  height: 100%;
+}
+.left {
+  background: #03a9f4;
+}
+</style>

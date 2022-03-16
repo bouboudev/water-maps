@@ -32,11 +32,13 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: { hideNavigation: true },
   },
   {
     path: "/register",
     name: "Register",
     component: Register,
+    meta: { hideNavigation: true },
   },
 ];
 
