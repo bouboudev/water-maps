@@ -1,14 +1,24 @@
 <template>
-  <v-app-bar class="d-flex justify-center" app color="light-blue" dark flat>
-    <h2>Water-maps 2</h2>
-    <v-spacer></v-spacer>
-    <v-btn @click="logout">Se déconnecter</v-btn>
-  </v-app-bar>
+  <v-card flat tile>
+    <v-toolbar color="#03a9f4" dense>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-toolbar-title class="pointer" @click="goHome"
+        >Water Maps</v-toolbar-title
+      >
+
+      <v-spacer></v-spacer>
+
+      <v-btn text to="/about"> à propos</v-btn>
+      <v-btn text @click="logout"> Se deconnecter </v-btn>
+    </v-toolbar>
+  </v-card>
 </template>
 
 <script>
 import firebase from "firebase";
 export default {
+  data: () => ({}),
   methods: {
     logout() {
       firebase
@@ -18,8 +28,16 @@ export default {
           this.$router.replace("login");
         });
     },
+    goHome() {
+      this.$router.push("/");
+    },
   },
+  computed: {},
 };
 </script>
 
-<style></style>
+<style>
+.pointer {
+  cursor: pointer;
+}
+</style>

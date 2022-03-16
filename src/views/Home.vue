@@ -1,22 +1,20 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <test />
-    <button @click="logout">Se déconnecter</button>
+    <h1>Accueil</h1>
+
+    <tablewater />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import test from "../components/test";
 import firebase from "firebase";
+import tablewater from "@/components/TableWater.vue";
 
 export default {
   name: "Home",
-  components: {
-    test,
-  },
+  components: { tablewater },
   methods: {
     logout() {
       firebase

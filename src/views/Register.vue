@@ -1,9 +1,11 @@
 <template>
   <v-row class="register">
-    <v-col cols="6"></v-col>
+    <v-col cols="6">
+      <h1>Water Maps</h1>
+    </v-col>
     <v-col cols="6" class="right">
       <h1>Bienvenue !</h1>
-      <v-card>
+      <v-card flat>
         <v-card-text>
           <h2>S'inscrire</h2>
           <v-text-field
