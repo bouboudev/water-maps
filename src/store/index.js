@@ -13,15 +13,15 @@ export default createStore({
     },
   },
   actions: {
-    async login({ commit }, details) {
-      //
-    },
-    async register({ commit }) {
-      //
-    },
-    async logout({ commit }) {
-      //
-    },
+    // async login({ commit }, details) {
+    //   //
+    // },
+    // async register({ commit }) {
+    //   //
+    // },
+    // async logout({ commit }) {
+    //   //
+    // },
   },
   modules: {},
 });
