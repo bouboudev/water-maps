@@ -4,6 +4,31 @@
       <h1>Water Maps</h1>
     </v-col>
     <v-col cols="6" class="right">
+      <div class="text-center ma-2">
+        <v-snackbar color="red accent-2" v-model="snackbar" top>
+          {{ error }}
+
+          <template v-slot:action="{ attrs }">
+            <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+              Fermer
+            </v-btn>
+          </template>
+        </v-snackbar>
+        <v-snackbar color="success accent-2" v-model="snackbarValide" top>
+          {{ message }}
+
+          <template v-slot:action="{ attrs }">
+            <v-btn
+              color="white"
+              text
+              v-bind="attrs"
+              @click="snackbarValide = false"
+            >
+              Fermer
+            </v-btn>
+          </template>
+        </v-snackbar>
+      </div>
       <h1>Bienvenue !</h1>
 
       <h3>S'inscrire</h3>
@@ -23,11 +48,7 @@
         v-model="passwordRegister"
       ></v-text-field>
 
-      <div class="white--text text--darken-1" v-show="error != ''">
-        <strong>
-          <p>{{ error }}</p>
-        </strong>
-      </div>
+      <v-alert type="error" v-show="error != ''"> {{ error }}</v-alert>
       <div style="cursor: pointer" @click="haveAccount">Déjà un compte ?</div>
       <v-btn @click="register" class="mt-4" light color="primary--text">
         S'inscrire
@@ -44,11 +65,14 @@ export default {
 
   data() {
     return {
+      snackbar: false,
+      snackbarValide: false,
       showRegister: false,
       showConnexion: false,
       emailRegister: "",
       passwordRegister: "",
       error: "",
+      message: "",
     };
   },
   methods: {
@@ -60,10 +84,12 @@ export default {
           this.passwordRegister
         )
         .then(() => {
-          alert("Inscription reussie ! Bienvenue dans la watermaps");
-          this.$router.push("/");
+          this.message = "Inscription reussie ! Bienvenue dans la watermaps";
+          this.snackbarValide = true;
+          setTimeout(() => this.$router.push({ path: "/" }), 2000);
         })
         .catch((error) => {
+          this.snackbar = true;
           this.error = error.message;
         });
     },
