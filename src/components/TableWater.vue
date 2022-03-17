@@ -8,7 +8,12 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="projects" :search="search">
+    <v-data-table
+      :headers="headers"
+      :items="projects"
+      :search="search"
+      :footer-props="{ itemsPerPageText: 'Forage par page' }"
+    >
       <template v-slot:[`item.Date`]="{ item }">
         <span>{{ item.Date.toDate().toLocaleDateString() }}</span>
       </template>
