@@ -14,14 +14,6 @@
       </template>
     </v-data-table>
   </v-card>
-
-  <!-- <v-card>
-    <div>
-      <v-card-title v-for="project in projects" :key="project.id">{{
-        project.Nom
-      }}</v-card-title>
-    </div>
-  </v-card> -->
 </template>
 
 <script>
@@ -37,7 +29,8 @@ export default {
           value: "Nom",
         },
         { text: "Date", value: "Date" },
-        { text: "Geoloc", value: "Geoloc" },
+        { text: "Latitude", value: "Geoloc._lat" },
+        { text: "Longitude", value: "Geoloc._long" },
         { text: "Village", value: "Village" },
         { text: "Image", value: "Image" },
       ],
@@ -138,6 +131,7 @@ export default {
           });
         }
       });
+      console.log(this.projects);
     });
   },
   methods: {},
