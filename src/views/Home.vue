@@ -2,7 +2,7 @@
   <div class="home">
     <h3>Accueil</h3>
     <v-row align="center" justify="center">
-      <v-col cols="6">
+      <v-col cols="8">
         <tablewater />
       </v-col>
     </v-row>

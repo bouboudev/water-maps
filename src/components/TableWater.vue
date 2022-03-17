@@ -4,7 +4,7 @@
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="Chercher un forage"
+        label="Rechercher un forage"
         hide-details
       ></v-text-field>
     </v-card-title>
