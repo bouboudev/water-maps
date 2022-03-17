@@ -34,7 +34,7 @@
       </div>
       <h1>Bienvenue !</h1>
 
-      <h3>Se connecter</h3>
+      <h3 class="mt-12 white--text">Se connecter</h3>
       <v-text-field
         solo
         label="Adresse mail"

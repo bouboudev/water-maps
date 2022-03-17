@@ -9,6 +9,9 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table :headers="headers" :items="projects" :search="search">
+      <template v-slot:[`item.Date`]="{ item }">
+        <span>{{ item.Date.toDate().toLocaleDateString() }}</span>
+      </template>
     </v-data-table>
   </v-card>
 
@@ -33,8 +36,8 @@ export default {
           text: "Nom",
           value: "Nom",
         },
-        { text: "date", value: "Date" },
-        { text: "geoloc", value: "Geoloc" },
+        { text: "Date", value: "Date" },
+        { text: "Geoloc", value: "Geoloc" },
         { text: "Village", value: "Village" },
         { text: "Image", value: "Image" },
       ],
@@ -122,6 +125,7 @@ export default {
       //   ],
     };
   },
+
   created() {
     db.collection("projects").onSnapshot((res) => {
       const changes = res.docChanges();
@@ -136,6 +140,7 @@ export default {
       });
     });
   },
+  methods: {},
 };
 </script>
 
