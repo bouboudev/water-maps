@@ -1,8 +1,11 @@
 <template>
   <div class="home">
     <h3>Accueil</h3>
-
-    <tablewater />
+    <v-row align="center" justify="center">
+      <v-col cols="6">
+        <tablewater />
+      </v-col>
+    </v-row>
   </div>
 </template>
 

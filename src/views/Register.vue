@@ -67,7 +67,7 @@
 import firebase from "firebase";
 
 export default {
-  name: "Login",
+  name: "register",
 
   data() {
     return {
@@ -105,11 +105,15 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .register {
   height: 100%;
 }
 .right {
   background: #03a9f4;
+}
+.logo {
+  font-size: 80px;
+  color: #03a9f4;
 }
 </style>
