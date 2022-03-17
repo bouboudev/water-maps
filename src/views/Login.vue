@@ -1,7 +1,8 @@
 <template>
   <v-row class="login">
-    <v-col cols="6">
-      <h1>Water Maps</h1>
+    <v-col cols="6" class="d-flex flex-column align-center mt-10">
+      <h1 class="logo">Water Maps <v-icon x-large>mdi-water</v-icon></h1>
+      <h2>Organiser ses forages en toute simplicité !</h2>
     </v-col>
     <v-col cols="6" class="right">
       <div class="text-center ma-2">
@@ -107,5 +108,9 @@ export default {
 }
 .right {
   background: #03a9f4;
+}
+.logo {
+  font-size: 80px;
+  color: #03a9f4;
 }
 </style>
