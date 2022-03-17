@@ -48,8 +48,8 @@
         v-model="passwordLogin"
       ></v-text-field>
       <v-alert type="error" v-show="error != ''"> {{ error }}</v-alert>
-      <div style="cursor: pointer" @click="needAccount">
-        Besoin d'un compte ?
+      <div>
+        <v-btn small text @click="needAccount">Besoin d'un compte ?</v-btn>
       </div>
 
       <v-btn @click="login" class="mt-4" light color="primary--text">

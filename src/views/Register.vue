@@ -29,7 +29,7 @@
           </template>
         </v-snackbar>
       </div>
-      <h1>Bienvenue !</h1>
+      <h1>Rejoins-nous !</h1>
 
       <h3>S'inscrire</h3>
       <v-text-field
@@ -49,7 +49,10 @@
       ></v-text-field>
 
       <v-alert type="error" v-show="error != ''"> {{ error }}</v-alert>
-      <div style="cursor: pointer" @click="haveAccount">Déjà un compte ?</div>
+      <div>
+        <v-btn small text @click="haveAccount">Déjà un compte ?</v-btn>
+      </div>
+
       <v-btn @click="register" class="mt-4" light color="primary--text">
         S'inscrire
       </v-btn>
