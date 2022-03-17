@@ -2,7 +2,7 @@
   <v-card flat tile>
     <v-toolbar class="white--text mb-5" color="#03a9f4" dense height="90">
       <v-toolbar-title class="pointer" @click.prevent="goHome">
-        <h1>Water Maps</h1>
+        <h1>Water Maps <v-icon x-large>mdi-water</v-icon></h1>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

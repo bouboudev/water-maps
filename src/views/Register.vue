@@ -5,24 +5,24 @@
     </v-col>
     <v-col cols="6" class="right">
       <h1>Bienvenue !</h1>
-      <v-card flat>
-        <v-card-text>
-          <h2>S'inscrire</h2>
-          <v-text-field
-            label="Adresse mail"
-            required
-            v-model="emailRegister"
-          ></v-text-field>
-          <v-text-field
-            :append-icon="showRegister ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showRegister ? 'text' : 'password'"
-            name="input-10-2"
-            label="Mot de passe"
-            @click:append="showRegister = !showRegister"
-            v-model="passwordRegister"
-          ></v-text-field>
-        </v-card-text>
-      </v-card>
+
+      <h3>S'inscrire</h3>
+      <v-text-field
+        solo
+        label="Adresse mail"
+        required
+        v-model="emailRegister"
+      ></v-text-field>
+      <v-text-field
+        solo
+        :append-icon="showRegister ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showRegister ? 'text' : 'password'"
+        name="input-10-2"
+        label="Mot de passe"
+        @click:append="showRegister = !showRegister"
+        v-model="passwordRegister"
+      ></v-text-field>
+
       <div class="white--text text--darken-1" v-show="error != ''">
         <strong>
           <p>{{ error }}</p>
