@@ -1,7 +1,9 @@
 <template>
   <v-row class="login">
     <v-col cols="6" class="d-flex flex-column align-center mt-10">
-      <h1 class="logo">Water Maps <v-icon x-large>mdi-water</v-icon></h1>
+      <h1 class="logo">
+        Water Maps <v-icon class="logo" x-large>mdi-water</v-icon>
+      </h1>
       <h2>Organiser ses forages en toute simplicité !</h2>
     </v-col>
     <v-col cols="6" class="right">
