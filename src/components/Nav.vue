@@ -8,7 +8,7 @@
       <v-spacer></v-spacer>
 
       <v-btn class="white--text" text to="/about"> à propos</v-btn>
-      <v-btn class="white--text" text @click="logout"> Se deconnecter </v-btn>
+      <v-btn text @click="logout"> Se deconnecter </v-btn>
     </v-toolbar>
   </v-card>
 </template>
