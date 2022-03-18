@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+        <v-btn text class="white--text" v-bind="attrs" v-on="on">
           Ajouter un forage
         </v-btn>
       </template>
@@ -14,42 +14,30 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Legal first name*" required></v-text-field>
+                <v-text-field label="Nom du forage" required></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
+                <v-text-field label="Nom du village"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
                 <v-text-field
-                  label="Legal middle name"
-                  hint="example of helper text only on focus"
+                  label="Latitude"
+                  hint="Exemple: 48.887737638046794"
+                ></v-text-field>
+                <v-text-field
+                  label="Longitude"
+                  hint="Exemple: 48.887737638046794"
                 ></v-text-field>
               </v-col>
-
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
+              <v-col cols="12" sm="6" md="4">
+                <v-text-field label="Image" required></v-text-field>
               </v-col>
-              <v-col cols="12" sm="6">
-                <v-autocomplete
-                  :items="[
-                    'Skiing',
-                    'Ice hockey',
-                    'Soccer',
-                    'Basketball',
-                    'Hockey',
-                    'Reading',
-                    'Writing',
-                    'Coding',
-                    'Basejump',
-                  ]"
-                  label="Interests"
-                  multiple
-                ></v-autocomplete>
+              <v-col cols="12" sm="6" md="4">
+                <v-text-field label="Date picker" required></v-text-field>
               </v-col>
             </v-row>
           </v-container>
-          <small>*indicates required field</small>
+          <small class="red--text">*Champs obligatoire</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>

@@ -4,9 +4,8 @@
       <v-toolbar-title class="pointer" @click.prevent="goHome">
         <h1>Water Maps <v-icon x-large>mdi-water</v-icon></h1>
       </v-toolbar-title>
-
       <v-spacer></v-spacer>
-
+      <v-btn text><Popup /></v-btn>
       <v-btn class="white--text" text to="/about"> à propos</v-btn>
       <v-btn text @click="logout">
         Se deconnecter <v-icon> mdi-logout</v-icon>
@@ -17,7 +16,11 @@
 
 <script>
 import firebase from "firebase";
+import Popup from "./Popup.vue";
 export default {
+  components: {
+    Popup,
+  },
   data: () => ({}),
   methods: {
     logout() {
