@@ -14,26 +14,58 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Nom du forage" required></v-text-field>
+                <v-text-field
+                  label="Nom du forage"
+                  v-model="nameDrilling"
+                  required
+                ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Nom du village"></v-text-field>
+                <v-text-field
+                  label="Nom du village"
+                  v-model="nameVillage"
+                  required
+                ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
                 <v-text-field
                   label="Latitude"
+                  v-model="latitudeDrilling"
                   hint="Exemple: 48.887737638046794"
                 ></v-text-field>
                 <v-text-field
                   label="Longitude"
+                  v-model="longitudeDrilling"
                   hint="Exemple: 48.887737638046794"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Image" required></v-text-field>
+                <v-text-field label="Image" v-model="imageUrl"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Date picker" required></v-text-field>
+                <v-menu
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="formattedDate"
+                      label="Picker without buttons"
+                      prepend-icon="mdi-calendar"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="datePicker"
+                    @input="menu = false"
+                  ></v-date-picker>
+                </v-menu>
               </v-col>
             </v-row>
           </v-container>
@@ -44,9 +76,7 @@
           <v-btn color="blue darken-1" text @click="dialog = false">
             Annuler
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">
-            Ajouter
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="valid"> Ajouter </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -54,11 +84,35 @@
 </template>
 
 <script>
+import format from "date-fns/format";
+import { parseISO } from "date-fns";
+
 export default {
   data() {
     return {
       dialog: false,
+      nameDrilling: "",
+      nameVillage: "",
+      latitudeDrilling: "",
+      longitudeDrilling: "",
+      imageUrl: "",
+      datePicker: null,
+      menu: false,
+      modal: false,
     };
+  },
+  methods: {
+    valid() {
+      this.dialog = false;
+      console.log(this.nameDrilling, this.nameVillage);
+    },
+  },
+  computed: {
+    formattedDate() {
+      return this.datePicker
+        ? format(parseISO(this.datePicker), "dd/MMMM/yyyy")
+        : "";
+    },
   },
 };
 </script>
