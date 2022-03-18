@@ -18,12 +18,17 @@
         <span>{{ item.Date.toDate().toLocaleDateString() }}</span>
       </template>
     </v-data-table>
+    <Popup />
   </v-card>
 </template>
 
 <script>
 import db from "@/main";
+import Popup from "./Popup.vue";
 export default {
+  components: {
+    Popup,
+  },
   data() {
     return {
       projects: [],
