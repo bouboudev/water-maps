@@ -37,10 +37,10 @@
             </v-btn>
           </template>
           <v-list dense>
-            <v-list-item class="pointer" @click="editEmployee(item)">
+            <v-list-item class="pointer" @click="editDrilling(item)">
               Editer
             </v-list-item>
-            <v-list-item class="pointer" @click="deleteEmployee(item)">
+            <v-list-item class="pointer" @click="deleteDrilling(item)">
               Supprimer
             </v-list-item>
           </v-list>
@@ -79,6 +79,17 @@ export default {
       ],
     };
   },
+  methods: {
+    editDrilling(item) {
+      console.log("item :", item);
+    },
+    deleteDrilling(item) {
+      db.collection("projects").doc(item.id).delete();
+      //dynamic table
+      // this.projects = [];
+      // this.dynamic();
+    },
+  },
 
   created() {
     db.collection("projects").onSnapshot((res) => {
@@ -87,6 +98,11 @@ export default {
       changes.forEach((change) => {
         if (change.type === "added") {
           this.projects.push({
+            ...change.doc.data(),
+            id: change.doc.id,
+          });
+        } else if (change.type === "removed") {
+          this.projects.pop({
             ...change.doc.data(),
             id: change.doc.id,
           });
