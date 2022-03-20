@@ -93,6 +93,7 @@
 <script>
 import format from "date-fns/format";
 import { parseISO } from "date-fns";
+import db from '@/main'
 
 export default {
   data() {
@@ -100,8 +101,8 @@ export default {
       dialog: false,
       nameDrilling: "",
       nameVillage: "",
-      latitudeDrilling: "",
-      longitudeDrilling: "",
+      latitudeDrilling: null,
+      longitudeDrilling: null,
       imageUrl: "",
       datePicker: null,
       menu: false,
@@ -113,6 +114,20 @@ export default {
     valid() {
       if (this.$refs.form.validate()) {
         console.log("ça mache !!!");
+        const project = {
+            Nom : this.nameDrilling,
+            Village : this.nameVillage,
+            Latitude : this.latitudeDrilling,
+            Longitude : this.longitudeDrilling,
+            Image : this.imageUrl,
+            Date :  new Date(this.datePicker)
+
+        }
+        db.collection('projects').add(project).then(()=>{
+            console.log("L'objet est ajouté :", this.project);
+            this.dialog=false;
+        })
+    
       }
     },
   },
