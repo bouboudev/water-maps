@@ -26,6 +26,26 @@
       <template v-slot:[`item.Date`]="{ item }">
         <span>{{ item.Date.toDate().toLocaleDateString() }}</span>
       </template>
+
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-menu>
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on">
+              <v-icon color="grey_dark" class="pointer">
+                mdi-dots-vertical</v-icon
+              >
+            </v-btn>
+          </template>
+          <v-list dense>
+            <v-list-item class="pointer" @click="editEmployee(item)">
+              Editer
+            </v-list-item>
+            <v-list-item class="pointer" @click="deleteEmployee(item)">
+              Supprimer
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
     </v-data-table>
   </v-card>
 </template>
@@ -50,6 +70,12 @@ export default {
         { text: "Longitude", value: "Longitude" },
         { text: "Village", value: "Village" },
         { text: "Image", value: "Image" },
+        {
+          text: "Actions",
+          align: "end",
+          value: "actions",
+          sortable: false,
+        },
       ],
     };
   },
