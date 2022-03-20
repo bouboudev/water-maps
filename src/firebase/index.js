@@ -1,12 +1,7 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import vuetify from "./plugins/vuetify";
-import firebase from "firebase";
-
-Vue.config.productionTip = false;
-let app = "";
-
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,19 +18,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
 
-const db = firebase.firestore();
-db.settings({ timestampsInSnapshots: true });
-
-firebase.auth().onAuthStateChanged(() => {
-  if (!app) {
-    app = new Vue({
-      router,
-      vuetify,
-      render: (h) => h(App),
-    }).$mount("#app");
-  }
-});
-
-export default db;
+export { auth, analytics };

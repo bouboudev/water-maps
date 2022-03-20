@@ -1,19 +1,22 @@
 <template>
   <v-app>
-    <v-app-bar class="d-flex justify-center" app color="light-blue" dark flat>
-      <h2>Water-maps 2</h2>
-    </v-app-bar>
     <v-main>
+      <Nav v-if="!$route.meta.hideNavigation"></Nav>
       <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
+import Nav from "@/components/Nav.vue";
 export default {
   name: "App",
+  components: {
+    Nav,
+  },
 
   data: () => ({
+    computed: {},
     //
   }),
 };
