@@ -139,6 +139,7 @@ export default {
             this.loading = false;
             this.dialog = false;
             this.$emit("projectAdded");
+            setTimeout(() => this.$router.push({ path: "/" }), 4000);
           });
       }
     },
