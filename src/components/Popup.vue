@@ -14,7 +14,7 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="6">
                   <v-text-field
                     label="Nom du forage"
                     v-model="nameDrilling"
@@ -22,7 +22,7 @@
                     required
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="6">
                   <v-text-field
                     label="Nom du village"
                     v-model="nameVillage"
@@ -30,13 +30,17 @@
                     required
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="4">
+              </v-row>
+              <v-row>
+                <v-col cols="6">
                   <v-text-field
                     label="Latitude"
                     v-model="latitudeDrilling"
                     hint="Exemple: 48.887737638046794"
                     :rules="inputRules"
                   ></v-text-field>
+                </v-col>
+                <v-col cols="6">
                   <v-text-field
                     label="Longitude"
                     v-model="longitudeDrilling"
@@ -44,10 +48,12 @@
                     :rules="inputRules"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="4">
+              </v-row>
+              <v-row>
+                <v-col cols="6">
                   <v-text-field label="Image" v-model="imageUrl"></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="6">
                   <v-menu
                     v-model="menu"
                     :close-on-content-click="false"
