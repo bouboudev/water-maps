@@ -1,5 +1,14 @@
 <template>
   <v-card>
+    <v-snackbar color="success accent-2" v-model="snackBar" top>
+      Super ! Vous venez d'ajouter un nouveau forage !
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="snackBar = false">
+          Fermer
+        </v-btn>
+      </template>
+    </v-snackbar>
     <v-card-title>
       <v-text-field
         v-model="search"
@@ -18,19 +27,17 @@
         <span>{{ item.Date.toDate().toLocaleDateString() }}</span>
       </template>
     </v-data-table>
-    <Popup />
   </v-card>
 </template>
 
 <script>
 import db from "@/main";
-import Popup from "./Popup.vue";
+
 export default {
-  components: {
-    Popup,
-  },
+  components: {},
   data() {
     return {
+      snackBar: false,
       projects: [],
       search: "",
       headers: [

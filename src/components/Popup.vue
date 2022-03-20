@@ -6,8 +6,8 @@
           Ajouter un forage
         </v-btn>
       </template>
-        <v-form ref="form">
-      <v-card>
+      <v-form ref="form">
+        <v-card>
           <v-card-title>
             <span class="text-h5">Ajouter un forage</span>
           </v-card-title>
@@ -82,10 +82,12 @@
             <v-btn color="blue darken-1" text @click="dialog = false">
               Annuler
             </v-btn>
-            <v-btn color="blue darken-1" text @click="valid"> Ajouter </v-btn>
+            <v-btn color="blue darken-1" text @click="valid" :loading="loading">
+              Ajouter
+            </v-btn>
           </v-card-actions>
-      </v-card>
-        </v-form>
+        </v-card>
+      </v-form>
     </v-dialog>
   </v-row>
 </template>
@@ -93,7 +95,7 @@
 <script>
 import format from "date-fns/format";
 import { parseISO } from "date-fns";
-import db from '@/main'
+import db from "@/main";
 
 export default {
   data() {
@@ -107,27 +109,31 @@ export default {
       datePicker: null,
       menu: false,
       modal: false,
-      inputRules: [(v) => v.length >= 3 || "Le Minimum est de 3 caractères."],
+      inputRules: [
+        (v) => (v && v.length >= 3) || "Le Minimum est de 3 caractères.",
+      ],
+      loading: false,
     };
   },
   methods: {
     valid() {
       if (this.$refs.form.validate()) {
-        console.log("ça mache !!!");
+        this.loading = true;
         const project = {
-            Nom : this.nameDrilling,
-            Village : this.nameVillage,
-            Latitude : this.latitudeDrilling,
-            Longitude : this.longitudeDrilling,
-            Image : this.imageUrl,
-            Date :  new Date(this.datePicker)
-
-        }
-        db.collection('projects').add(project).then(()=>{
-            console.log("L'objet est ajouté :", this.project);
-            this.dialog=false;
-        })
-    
+          Nom: this.nameDrilling,
+          Village: this.nameVillage,
+          Latitude: this.latitudeDrilling,
+          Longitude: this.longitudeDrilling,
+          Image: this.imageUrl,
+          Date: new Date(this.datePicker),
+        };
+        db.collection("projects")
+          .add(project)
+          .then(() => {
+            this.loading = false;
+            this.dialog = false;
+            this.$emit("projectAdded");
+          });
       }
     },
   },
