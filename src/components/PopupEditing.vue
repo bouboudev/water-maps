@@ -1,15 +1,10 @@
 <template>
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn text class="white--text" v-bind="attrs" v-on="on">
-          Ajouter un forage
-        </v-btn>
-      </template>
       <v-form ref="form">
         <v-card>
           <v-card-title>
-            <span class="text-h5">Ajouter un forage</span>
+            <span class="text-h5">Editer un forage</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -89,7 +84,7 @@
               Annuler
             </v-btn>
             <v-btn color="blue darken-1" text @click="valid" :loading="loading">
-              Ajouter
+              Editer
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -104,9 +99,9 @@ import { parseISO } from "date-fns";
 import db from "@/main";
 
 export default {
+  props: ["dialog"],
   data() {
     return {
-      dialog: false,
       nameDrilling: "",
       nameVillage: "",
       latitudeDrilling: null,
@@ -139,12 +134,6 @@ export default {
             this.loading = false;
             this.dialog = false;
             this.$emit("projectAdded");
-            this.nameDrilling = "";
-            this.nameVillage = "";
-            this.latitudeDrilling = null;
-            this.longitudeDrilling = null;
-            this.imageUrl = "";
-            this.datePicker = null;
             setTimeout(() => this.$router.push({ path: "/" }), 4000);
           });
       }

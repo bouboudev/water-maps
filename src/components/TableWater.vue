@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-snackbar color="success accent-2" v-model="snackBar" top>
+    <v-snackbar color="accent-2" v-model="snackBar" top>
       Super ! Vous venez d'ajouter un nouveau forage !
 
       <template v-slot:action="{ attrs }">
@@ -9,6 +9,7 @@
         </v-btn>
       </template>
     </v-snackbar>
+    <PopupEditing :dialog="dialogPopup" />
     <v-card-title>
       <v-text-field
         v-model="search"
@@ -41,7 +42,34 @@
               Editer
             </v-list-item>
             <v-list-item class="pointer" @click="deleteDrilling(item)">
-              Supprimer
+              <v-dialog v-model="dialogConfirm" persistent max-width="290">
+                <template v-slot:activator="{ on, attrs }">
+                  <div text v-bind="attrs" v-on="on">Supprimer</div>
+                </template>
+                <v-card>
+                  <v-card-title class="text-h5">
+                    Voulez-vous vraiment supprimer ce forage ?
+                  </v-card-title>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="dialogConfirm = false"
+                    >
+                      Annuler
+                    </v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="deleteDrilling(item)"
+                    >
+                      Supprimer
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -52,11 +80,14 @@
 
 <script>
 import db from "@/main";
+import PopupEditing from "./PopupEditing.vue";
 
 export default {
-  components: {},
+  components: { PopupEditing },
   data() {
     return {
+      dialogConfirm: false,
+      dialogPopup: false,
       snackBar: false,
       projects: [],
       search: "",
@@ -81,10 +112,13 @@ export default {
   },
   methods: {
     editDrilling(item) {
-      console.log("item :", item);
+      this.dialogPopup = true;
+      console.log("Success editing", item);
     },
     deleteDrilling(item) {
       db.collection("projects").doc(item.id).delete();
+
+      this.dialogConfirm = false;
       //dynamic table
       // this.projects = [];
       // this.dynamic();
