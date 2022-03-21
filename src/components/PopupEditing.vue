@@ -80,9 +80,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = !dialog">
-              Annuler
-            </v-btn>
+            <v-btn color="blue darken-1" text @click="annule"> Annuler </v-btn>
             <v-btn color="blue darken-1" text @click="valid" :loading="loading">
               Editer
             </v-btn>
@@ -142,6 +140,10 @@ export default {
             setTimeout(() => this.$router.push({ path: "/" }), 4000);
           });
       }
+    },
+    annule() {
+      this.dialog = false;
+      console.log("dialog false");
     },
   },
   computed: {

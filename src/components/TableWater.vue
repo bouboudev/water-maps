@@ -19,7 +19,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-snackbar color="accent-2" v-model="snackBar" top>
+    <!-- <v-snackbar color="accent-2" v-model="snackBar" top>
       Super ! Vous venez d'ajouter un nouveau forage !
 
       <template v-slot:action="{ attrs }">
@@ -27,7 +27,7 @@
           Fermer
         </v-btn>
       </template>
-    </v-snackbar>
+    </v-snackbar> -->
     <PopupEditing :dialog="dialogPopup" />
     <v-card flat class="d-flex justify-space-between">
       <v-card-title>
@@ -147,12 +147,11 @@ export default {
   },
   methods: {
     editDrilling(item) {
-      this.dialogPopup = !this.dialogPopup;
-      console.log("Success editing", item);
+      this.dialogPopup = true;
+      console.log("Success editing", item.id);
     },
     deleteDrilling(item) {
       db.collection("projects").doc(item.id).delete();
-
       this.dialogConfirm = false;
     },
   },

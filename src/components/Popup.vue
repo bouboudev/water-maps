@@ -57,6 +57,13 @@
               <v-row>
                 <v-col cols="6">
                   <v-text-field label="Image" v-model="imageUrl"></v-text-field>
+
+                  <v-file-input
+                    @change="onFileSelected"
+                    label="Image du Forage"
+                    filled
+                    prepend-icon="mdi-camera"
+                  ></v-file-input>
                 </v-col>
                 <v-col cols="6">
                   <v-menu
@@ -127,6 +134,9 @@ export default {
     };
   },
   methods: {
+    onFileSelected(event) {
+      console.log(event);
+    },
     valid() {
       if (this.$refs.form.validate()) {
         this.loading = true;
