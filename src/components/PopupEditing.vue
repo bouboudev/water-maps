@@ -80,7 +80,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
+            <v-btn color="blue darken-1" text @click="dialog = !dialog">
               Annuler
             </v-btn>
             <v-btn color="blue darken-1" text @click="valid" :loading="loading">
@@ -99,7 +99,12 @@ import { parseISO } from "date-fns";
 import db from "@/main";
 
 export default {
-  props: ["dialog"],
+  props: {
+    dialog: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       nameDrilling: "",

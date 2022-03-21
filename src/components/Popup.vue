@@ -1,8 +1,13 @@
 <template>
-  <v-row justify="center">
+  <v-row>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn text class="white--text" v-bind="attrs" v-on="on">
+        <v-btn
+          class="white--text"
+          color="blue darken-1"
+          v-bind="attrs"
+          v-on="on"
+        >
           Ajouter un forage
         </v-btn>
       </template>

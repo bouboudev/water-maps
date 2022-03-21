@@ -1,5 +1,24 @@
 <template>
   <v-card>
+    <v-snackbar
+      color="success accent-2"
+      v-model="snackBarDrilling"
+      top
+      :timeout="4000"
+    >
+      Super ! Vous venez d'ajouter un nouveau forage !
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackBarDrilling = false"
+        >
+          Fermer
+        </v-btn>
+      </template>
+    </v-snackbar>
     <v-snackbar color="accent-2" v-model="snackBar" top>
       Super ! Vous venez d'ajouter un nouveau forage !
 
@@ -10,14 +29,23 @@
       </template>
     </v-snackbar>
     <PopupEditing :dialog="dialogPopup" />
-    <v-card-title>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Rechercher un forage"
-        hide-details
-      ></v-text-field>
-    </v-card-title>
+    <v-card flat class="d-flex justify-space-between">
+      <v-card-title>
+        <h3>Liste des forages</h3>
+      </v-card-title>
+      <v-card-title>
+        <Popup @projectAdded="snackBarDrilling = true" />
+      </v-card-title>
+      <v-card-title>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Rechercher un forage"
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+    </v-card>
+
     <v-data-table
       :headers="headers"
       :items="projects"
@@ -81,11 +109,13 @@
 <script>
 import db from "@/main";
 import PopupEditing from "./PopupEditing.vue";
+import Popup from "./Popup.vue";
 
 export default {
-  components: { PopupEditing },
+  components: { PopupEditing, Popup },
   data() {
     return {
+      snackBarDrilling: false,
       dialogConfirm: false,
       dialogPopup: false,
       snackBar: false,
@@ -112,16 +142,13 @@ export default {
   },
   methods: {
     editDrilling(item) {
-      this.dialogPopup = true;
+      this.dialogPopup = !this.dialogPopup;
       console.log("Success editing", item);
     },
     deleteDrilling(item) {
       db.collection("projects").doc(item.id).delete();
 
       this.dialogConfirm = false;
-      //dynamic table
-      // this.projects = [];
-      // this.dynamic();
     },
   },
 
