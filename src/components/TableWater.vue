@@ -38,6 +38,11 @@
       </v-card-title>
       <v-card-title>
         <v-text-field
+          prepend-icon="mdi-water-pump"
+          rounded
+          dense
+          clearable
+          outlined
           v-model="search"
           append-icon="mdi-magnify"
           label="Rechercher un forage"
