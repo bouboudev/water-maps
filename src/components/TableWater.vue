@@ -60,6 +60,9 @@
       <template v-slot:[`item.Date`]="{ item }">
         <span>{{ item.Date.toDate().toLocaleDateString() }}</span>
       </template>
+      <template v-slot:[`item.Image`]="{ item }">
+        <v-img :src="item.Image" max-height="150" max-width="250"></v-img>
+      </template>
 
       <template v-slot:[`item.actions`]="{ item }">
         <v-menu>

@@ -56,10 +56,10 @@
               </v-row>
               <v-row>
                 <v-col cols="6">
-                  <v-text-field label="Image" v-model="imageUrl"></v-text-field>
+                  <v-i label="Image" v-model="imageUrl"></v-i>
 
                   <v-file-input
-                    @change="onFileSelected"
+                    @change="uploadImage"
                     label="Image du Forage"
                     filled
                     prepend-icon="mdi-camera"
@@ -114,6 +114,7 @@
 import format from "date-fns/format";
 import { parseISO } from "date-fns";
 import db from "@/main";
+import firebase from "firebase";
 
 export default {
   data() {
@@ -124,6 +125,9 @@ export default {
       latitudeDrilling: null,
       longitudeDrilling: null,
       imageUrl: "",
+      imageData: null,
+      picture: null,
+      uploadValue: 0,
       datePicker: null,
       menu: false,
       modal: false,
@@ -134,9 +138,30 @@ export default {
     };
   },
   methods: {
-    onFileSelected(event) {
-      console.log(event);
+    uploadImage(event) {
+      let file = event;
+
+      console.log(file.name);
+      var storageRef = firebase.storage().ref("Forage/" + file.name);
+      let uploadTask = storageRef.put(file);
+      uploadTask.on(
+        "state_changed",
+        () => {},
+        (error) => {
+          // Handle unsuccessful uploads
+          console.log(error.message);
+        },
+        () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.imageUrl = downloadURL;
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
     },
+
     valid() {
       if (this.$refs.form.validate()) {
         this.loading = true;
