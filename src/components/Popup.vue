@@ -56,14 +56,14 @@
               </v-row>
               <v-row>
                 <v-col cols="6">
-                  <v-i label="Image" v-model="imageUrl"></v-i>
-
                   <v-file-input
                     @change="uploadImage"
                     label="Image du Forage"
                     filled
                     prepend-icon="mdi-camera"
                   ></v-file-input>
+                  <h5>Prévisualisation de l'image:</h5>
+                  <v-img :src="imageUrl" max-height="70" max-width="70"></v-img>
                 </v-col>
                 <v-col cols="6">
                   <v-menu

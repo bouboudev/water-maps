@@ -61,7 +61,7 @@
         <span>{{ item.Date.toDate().toLocaleDateString() }}</span>
       </template>
       <template v-slot:[`item.Image`]="{ item }">
-        <v-img :src="item.Image" max-height="150" max-width="250"></v-img>
+        <v-img :src="item.Image" max-height="50" max-width="50"></v-img>
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
