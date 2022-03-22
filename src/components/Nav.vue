@@ -6,7 +6,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-btn class="white--text" text to="/about"> à propos</v-btn>
+      <v-btn class="white--text" text to="/profil"> Mon profil</v-btn>
       <v-btn text @click="logout">
         Se deconnecter <v-icon> mdi-logout</v-icon>
       </v-btn>

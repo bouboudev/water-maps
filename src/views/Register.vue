@@ -37,6 +37,12 @@
       <h3 class="mt-12 white--text">S'inscrire</h3>
       <v-text-field
         solo
+        label="Nom"
+        required
+        v-model="nameRegister"
+      ></v-text-field>
+      <v-text-field
+        solo
         label="Adresse mail"
         required
         v-model="emailRegister"
@@ -75,6 +81,7 @@ export default {
       snackbarValide: false,
       showRegister: false,
       showConnexion: false,
+      nameRegister: "",
       emailRegister: "",
       passwordRegister: "",
       error: "",
