@@ -41,8 +41,6 @@
                     <v-text-field
                       :disabled="!disabled"
                       v-model="firstname"
-                      :rules="nameRules"
-                      :counter="10"
                       label="Prénom"
                       required
                     ></v-text-field>
@@ -51,7 +49,6 @@
                     <v-text-field
                       :disabled="!disabled"
                       v-model="lastname"
-                      :rules="nameRules"
                       label="Nom"
                       required
                     ></v-text-field>
@@ -60,7 +57,6 @@
                     <v-text-field
                       :disabled="!disabled"
                       v-model="firstname"
-                      :rules="nameRules"
                       label="Nom de l'association"
                       required
                     ></v-text-field>
@@ -70,7 +66,6 @@
                     <v-text-field
                       :disabled="!disabled"
                       v-model="email"
-                      :rules="emailRules"
                       label="E-mail"
                       required
                     ></v-text-field>
@@ -79,7 +74,6 @@
                     <v-text-field
                       :disabled="!disabled"
                       v-model="number"
-                      :rules="emailRules"
                       label="Numéro de téléphone"
                       :counter="10"
                       required
@@ -108,7 +102,7 @@
                       :disabled="!disabled"
                       large
                       color="blue darken-1 white--text"
-                      @click="Enregistrer"
+                      @click="enregistrer()"
                     >
                       Enregistrer
                     </v-btn>
@@ -147,9 +141,13 @@ import firebase from "firebase";
 export default {
   data() {
     return {
+      valid: false,
       disabled: false,
       tabs: null,
+      firstname: "",
+      lastname: "",
       email: null,
+      number: null,
     };
   },
   computed: {
@@ -159,6 +157,11 @@ export default {
         computedInitials = this.email.charAt(0);
       }
       return computedInitials;
+    },
+  },
+  methods: {
+    enregistrer() {
+      console.log("Enregistrer");
     },
   },
   created() {
