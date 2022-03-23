@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- menu tabs -->
-    <v-card>
-      <v-toolbar color="purple" dark flat>
+    <v-card flat>
+      <v-toolbar flat>
         <template v-slot:extension>
           <v-tabs v-model="tabs" centered>
             <v-tab> Profil card</v-tab>
@@ -53,7 +53,6 @@
                       <v-text-field
                         v-model="lastname"
                         :rules="nameRules"
-                        :counter="10"
                         label="Nom"
                         required
                       ></v-text-field>
@@ -62,7 +61,6 @@
                       <v-text-field
                         v-model="firstname"
                         :rules="nameRules"
-                        :counter="10"
                         label="Nom de l'association"
                         required
                       ></v-text-field>
@@ -73,6 +71,15 @@
                         v-model="email"
                         :rules="emailRules"
                         label="E-mail"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-text-field
+                        v-model="number"
+                        :rules="emailRules"
+                        label="Numéro de téléphone"
+                        :counter="10"
                         required
                       ></v-text-field>
                     </v-col>
