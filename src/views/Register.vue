@@ -71,6 +71,7 @@
 
 <script>
 import firebase from "firebase";
+import db from "@/main";
 
 export default {
   name: "register",
@@ -96,7 +97,25 @@ export default {
           this.emailRegister,
           this.passwordRegister
         )
-        .then(() => {
+        .then((user) => {
+          console.log(user.user.uid);
+
+          user.user.updateProfile({
+            displayName: this.nameRegister,
+          });
+
+          db.collection("profiles")
+            .doc(user.user.uid)
+            .set({
+              name: this.nameRegister,
+            })
+            .then(function () {
+              console.log("Document successfully written!", this.nameRegister);
+            })
+            .catch(function (error) {
+              console.error("Error writing document: ", error);
+            });
+
           this.message = "Inscription reussie ! Bienvenue dans la watermaps";
           this.snackbarValide = true;
           setTimeout(() => this.$router.push({ path: "/" }), 2000);

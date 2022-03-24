@@ -15,7 +15,14 @@
       <v-tab-item>
         <v-card flat>
           <!-- card profil : -->
-          <v-card outlined flat class="mx-auto mt-15" max-width="434" tile>
+          <v-card
+            outlined
+            flat
+            class="mx-auto mt-15"
+            max-width="434"
+            tile
+            id="profile"
+          >
             <v-img height="100%"></v-img>
             <v-col>
               <v-avatar color="indigo">
@@ -40,7 +47,7 @@
                   <v-col cols="12" md="4">
                     <v-text-field
                       :disabled="!disabled"
-                      v-model="firstname"
+                      v-model="profil.name"
                       label="Prénom"
                       required
                     ></v-text-field>
@@ -56,7 +63,7 @@
                   <v-col cols="12" md="4">
                     <v-text-field
                       :disabled="!disabled"
-                      v-model="firstname"
+                      v-model="nameassos"
                       label="Nom de l'association"
                       required
                     ></v-text-field>
@@ -102,7 +109,7 @@
                       :disabled="!disabled"
                       large
                       color="blue darken-1 white--text"
-                      @click="enregistrer()"
+                      @click="updateProfile"
                     >
                       Enregistrer
                     </v-btn>
@@ -138,13 +145,17 @@
 
 <script>
 import firebase from "firebase";
+import db from "@/main";
 export default {
   data() {
     return {
       valid: false,
       disabled: false,
       tabs: null,
-      firstname: "",
+      profil: {
+        name: null,
+      },
+      nameassos: "",
       lastname: "",
       email: null,
       number: null,
@@ -159,15 +170,25 @@ export default {
       return computedInitials;
     },
   },
+  firestore() {
+    const user = firebase.auth().currentUser;
+    return {
+      profil: db.collection("profiles").doc(user.uid),
+    };
+  },
+
   methods: {
-    enregistrer() {
-      console.log("Enregistrer");
+    updateProfile() {
+      // this.$firestore.profile.update(this.profile);
+      var user = firebase.auth().currentUser;
+      console.log(user.uid);
     },
   },
   created() {
     var user = firebase.auth().currentUser;
+    console.log("user :", user);
     this.email = user.email;
-    console.log(this.name);
+    this.profil.name = user.displayName;
   },
 };
 </script>
