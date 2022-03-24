@@ -25,13 +25,16 @@
           >
             <v-img height="100%"></v-img>
             <v-col>
-              <v-avatar color="indigo">
+              <v-avatar :color="color">
                 <span class="white--text text-h5">{{ this.initials }}</span>
               </v-avatar>
             </v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
-                <v-list-item-title class="title">{{ email }}</v-list-item-title>
+                <v-list-item-title class="title"
+                  >{{ firstName }} {{ lastName }}</v-list-item-title
+                >
+                <v-list-item-subtitle>{{ nameAssos }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-card>
@@ -47,7 +50,7 @@
                   <v-col cols="12" md="4">
                     <v-text-field
                       :disabled="!disabled"
-                      v-model="profil.name"
+                      v-model="firstName"
                       label="Prénom"
                       required
                     ></v-text-field>
@@ -55,7 +58,7 @@
                   <v-col cols="12" md="4">
                     <v-text-field
                       :disabled="!disabled"
-                      v-model="lastname"
+                      v-model="lastName"
                       label="Nom"
                       required
                     ></v-text-field>
@@ -63,7 +66,7 @@
                   <v-col cols="12" md="4">
                     <v-text-field
                       :disabled="!disabled"
-                      v-model="nameassos"
+                      v-model="nameAssos"
                       label="Nom de l'association"
                       required
                     ></v-text-field>
@@ -145,6 +148,7 @@
 
 <script>
 import firebase from "firebase";
+import stringToColor from "string-to-color";
 import db from "@/main";
 export default {
   data() {
@@ -152,11 +156,9 @@ export default {
       valid: false,
       disabled: false,
       tabs: null,
-      profil: {
-        name: null,
-      },
-      nameassos: "",
-      lastname: "",
+      nameAssos: "",
+      firstName: null,
+      lastName: "",
       email: null,
       number: null,
     };
@@ -164,31 +166,47 @@ export default {
   computed: {
     initials: function () {
       let computedInitials = "";
-      if (this.email && this.email.length > 0) {
-        computedInitials = this.email.charAt(0);
+      if (this.firstName && this.firstName.length > 0) {
+        computedInitials = this.firstName.charAt(0) + this.lastName.charAt(0);
       }
       return computedInitials;
     },
-  },
-  firestore() {
-    const user = firebase.auth().currentUser;
-    return {
-      profil: db.collection("profiles").doc(user.uid),
-    };
+    color: function () {
+      const computedColor = stringToColor(this.firstName + this.lastName);
+      return computedColor;
+    },
   },
 
   methods: {
     updateProfile() {
-      // this.$firestore.profile.update(this.profile);
+      this.$firestore.profile.update(this.profile);
       var user = firebase.auth().currentUser;
       console.log(user.uid);
     },
   },
+
   created() {
     var user = firebase.auth().currentUser;
-    console.log("user :", user);
     this.email = user.email;
-    this.profil.name = user.displayName;
+
+    // Method pour trouver les informations du profil :
+    var docRef = db.collection("profiles").doc(user.uid);
+    docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          this.firstName = doc.data().firstname;
+          this.lastName = doc.data().lastname;
+          this.nameAssos = doc.data().assos;
+          this.number = doc.data().number;
+          this.console.log("Document data:", doc.data());
+        } else {
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
   },
 };
 </script>

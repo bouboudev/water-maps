@@ -37,9 +37,27 @@
       <h3 class="mt-12 white--text">S'inscrire</h3>
       <v-text-field
         solo
+        label="Nom de l'association"
+        required
+        v-model="assosRegister"
+      ></v-text-field>
+      <v-text-field
+        solo
+        label="Prénom"
+        required
+        v-model="firstNameRegister"
+      ></v-text-field>
+      <v-text-field
+        solo
         label="Nom"
         required
-        v-model="nameRegister"
+        v-model="lastNameRegister"
+      ></v-text-field>
+      <v-text-field
+        solo
+        label="Numéro de télépone"
+        required
+        v-model="numberRegister"
       ></v-text-field>
       <v-text-field
         solo
@@ -82,7 +100,10 @@ export default {
       snackbarValide: false,
       showRegister: false,
       showConnexion: false,
-      nameRegister: "",
+      assosRegister: "",
+      firstNameRegister: "",
+      lastNameRegister: "",
+      numberRegister: "",
       emailRegister: "",
       passwordRegister: "",
       error: "",
@@ -99,18 +120,17 @@ export default {
         )
         .then((user) => {
           console.log(user.user.uid);
-
-          user.user.updateProfile({
-            displayName: this.nameRegister,
-          });
-
+          //  ajouter à la collection profiles les informations de l'utilisateur
           db.collection("profiles")
             .doc(user.user.uid)
             .set({
-              name: this.nameRegister,
+              assos: this.assosRegister,
+              firstname: this.firstNameRegister,
+              lastname: this.lastNameRegister,
+              number: this.numberRegister,
             })
             .then(function () {
-              console.log("Document successfully written!", this.nameRegister);
+              console.log("Document successfully written!");
             })
             .catch(function (error) {
               console.error("Error writing document: ", error);
