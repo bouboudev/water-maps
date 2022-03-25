@@ -3,7 +3,7 @@
     <!-- snackbar -->
     <div class="text-center ma-2">
       <v-snackbar color="success accent-2" v-model="snackbar" top>
-        Votre profile a été mis à jour avec succès !
+        Votre profil a été mis à jour avec succès !
 
         <template v-slot:action="{ attrs }">
           <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
@@ -12,7 +12,6 @@
         </template>
       </v-snackbar>
     </div>
-
     <!-- menu tabs -->
     <v-toolbar flat>
       <template v-slot:extension>
@@ -48,6 +47,7 @@
                   >{{ firstName }} {{ lastName }}</v-list-item-title
                 >
                 <v-list-item-subtitle>{{ nameAssos }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-card>
@@ -194,7 +194,21 @@ export default {
   methods: {
     updateProfile() {
       // Method pour modifier les informations du profil :
-      var user = firebase.auth().currentUser;
+      const user = firebase.auth().currentUser;
+
+      user
+        .updateEmail(this.email)
+        .then(() => {
+          console.log("Email updated");
+          // Update successful
+          // ...
+        })
+        .catch((error) => {
+          console.log(error);
+          // An error occurred
+          // ...
+        });
+
       var docRef = db.collection("profiles").doc(user.uid);
       docRef.set({
         firstname: this.firstName,
