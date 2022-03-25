@@ -1,5 +1,18 @@
 <template>
   <div>
+    <!-- snackbar -->
+    <div class="text-center ma-2">
+      <v-snackbar color="success accent-2" v-model="snackbar" top>
+        Votre profile a été mis à jour avec succès !
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+            Fermer
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </div>
+
     <!-- menu tabs -->
     <v-toolbar flat>
       <template v-slot:extension>
@@ -161,6 +174,7 @@ export default {
       lastName: "",
       email: null,
       number: null,
+      snackbar: false,
     };
   },
   computed: {
@@ -179,34 +193,45 @@ export default {
 
   methods: {
     updateProfile() {
-      this.$firestore.profile.update(this.profile);
+      // Method pour modifier les informations du profil :
       var user = firebase.auth().currentUser;
-      console.log(user.uid);
+      var docRef = db.collection("profiles").doc(user.uid);
+      docRef.set({
+        firstname: this.firstName,
+        lastname: this.lastName,
+        assos: this.nameAssos,
+        number: this.number,
+      });
+
+      this.disabled = false;
+      this.snackbar = true;
+    },
+    getProfile() {
+      // Method pour trouver les informations du profil :
+      var user = firebase.auth().currentUser;
+      this.email = user.email;
+      var docRef = db.collection("profiles").doc(user.uid);
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            this.firstName = doc.data().firstname;
+            this.lastName = doc.data().lastname;
+            this.nameAssos = doc.data().assos;
+            this.number = doc.data().number;
+            console.log("Document data:", doc.data());
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
     },
   },
 
   created() {
-    var user = firebase.auth().currentUser;
-    this.email = user.email;
-
-    // Method pour trouver les informations du profil :
-    var docRef = db.collection("profiles").doc(user.uid);
-    docRef
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          this.firstName = doc.data().firstname;
-          this.lastName = doc.data().lastname;
-          this.nameAssos = doc.data().assos;
-          this.number = doc.data().number;
-          this.console.log("Document data:", doc.data());
-        } else {
-          console.log("No such document!");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
-      });
+    this.getProfile();
   },
 };
 </script>
