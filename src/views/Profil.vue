@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>{{ user.id }}</h2>
     <!-- snackbar -->
     <div class="text-center ma-2">
       <v-snackbar color="success accent-2" v-model="snackbar" top>
@@ -160,6 +161,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import firebase from "firebase";
 import stringToColor from "string-to-color";
 import db from "@/main";
@@ -189,6 +191,7 @@ export default {
       const computedColor = stringToColor(this.firstName + this.lastName);
       return computedColor;
     },
+    ...mapState({ user: (state) => state.user }),
   },
 
   methods: {
