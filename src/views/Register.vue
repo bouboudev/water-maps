@@ -74,7 +74,7 @@
         :counter="10"
         :rules="numberRules"
         error-count="3"
-        v-model.number="numberRegister"
+        v-model="numberRegister"
       ></v-text-field>
       <v-text-field
         filled
@@ -141,7 +141,7 @@ export default {
        numberRules: [
         v => !!v || 'Le numéro est recquis',
         v => (v && v.length >= 10) || 'Le numéro doit être de 10 chiffres',
-        v => Number.isInteger(Number(v)) || "The value must be an integer number"
+        
       ],
       emailRules: [
         v => !!v || 'E-mail est recquis',
