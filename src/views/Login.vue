@@ -36,13 +36,17 @@
 
       <h3 class="mt-12 white--text">Se connecter</h3>
       <v-text-field
-        solo
+        filled
+        background-color="white"
+        color="grey-dark"
         label="Adresse mail"
         required
         v-model="emailLogin"
       ></v-text-field>
       <v-text-field
-        solo
+         filled
+        background-color="white"
+        color="grey-dark"
         :append-icon="showConnexion ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showConnexion ? 'text' : 'password'"
         name="input-10-2"

@@ -44,7 +44,6 @@
       <v-text-field
         filled
         background-color="white"
-        color="grey-dark"
         label="Nom de l'association"  
         :rules="caractereRules"
         required
