@@ -44,6 +44,7 @@
       <v-text-field
         filled
         background-color="white"
+        color="grey-dark"
         label="Nom de l'association"  
         :rules="caractereRules"
         required
@@ -52,6 +53,7 @@
       <v-text-field
         filled
         background-color="white"
+        color="grey-dark"
         label="Prénom"
         :rules="caractereRules"
         required
@@ -60,6 +62,7 @@
       <v-text-field
         filled
         background-color="white"
+        color="grey-dark"
         label="Nom"
         :rules="caractereRules"
         required
@@ -68,6 +71,7 @@
       <v-text-field
         filled
         background-color="white"
+        color="grey-dark"
         label="Numéro de télépone"
         required
         :counter="10"
@@ -78,6 +82,7 @@
       <v-text-field
         filled
         background-color="white"
+        color="grey-dark"
         label="Adresse mail"
         required
         :rules="caractereRules"
@@ -86,6 +91,7 @@
       <v-text-field
         filled
         background-color="white"
+        color="grey-dark"
         :append-icon="showRegister ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showRegister ? 'text' : 'password'"
         name="input-10-2"
