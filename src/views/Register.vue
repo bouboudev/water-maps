@@ -114,7 +114,7 @@
           @click:append="showRegister = !showRegister"
           required
           :rules="confirmPasswordRules"
-          error-count="5"
+          error-count="2"
           v-model="confirmPasswordRegister"
         ></v-text-field>
 
