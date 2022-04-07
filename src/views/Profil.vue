@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>{{ user.id }}</h2>
     <!-- snackbar -->
     <div class="text-center ma-2">
       <v-snackbar color="success accent-2" v-model="snackbar" top>
@@ -162,6 +161,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import firebase from "firebase";
 import stringToColor from "string-to-color";
 import db from "@/main";
@@ -177,9 +177,12 @@ export default {
       email: null,
       number: null,
       snackbar: false,
+      userfirebase: null,
     };
   },
   computed: {
+    ...mapGetters(["getUser"]),
+
     initials: function () {
       let computedInitials = "";
       if (this.firstName && this.firstName.length > 0) {
@@ -249,6 +252,7 @@ export default {
 
   created() {
     this.getProfile();
+    console.log("les utilisateurs :", this.getuser);
   },
 };
 </script>
