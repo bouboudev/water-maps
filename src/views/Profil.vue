@@ -60,6 +60,13 @@
             <v-container>
               <v-card outlined class="pa-10">
                 <v-row>
+                  <v-col cols="12" md="12">
+                    <v-avatar :color="color" size="136">
+                      <span class="white--text text-h2">{{
+                        this.initials
+                      }}</span>
+                    </v-avatar>
+                  </v-col>
                   <v-col cols="12" md="4">
                     <v-text-field
                       :disabled="!disabled"
