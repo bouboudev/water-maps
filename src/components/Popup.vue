@@ -57,6 +57,7 @@
               <v-row>
                 <v-col cols="6">
                   <v-file-input
+                    accept=".png,.jpg,.jpeg"
                     @change="uploadImage"
                     label="Image du Forage"
                     filled
